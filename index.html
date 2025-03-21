@@ -1,12 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My GitHub Page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Krish Patel - Portfolio</title>
+  <style>
+    /* General Body Styling */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    /* Header Section */
+    .header {
+      padding: 20px;
+      text-align: center;
+      background-color: #f4f4f4;
+    }
+
+    .header img {
+      width: 150px;
+      height: auto;
+      border-radius: 50%;
+      margin-top: 10px;
+    }
+
+    /* Main Content */
+    .container {
+      padding: 20px;
+    }
+
+    /* Responsive Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    td {
+      padding: 10px;
+    }
+
+    /* Responsive Figures */
+    .figure-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    figure {
+      text-align: center;
+      max-width: 250px;
+    }
+
+    figure img {
+      width: 100%;
+      height: auto;
+    }
+
+    figcaption {
+      margin-top: 10px;
+      font-size: 0.9em;
+      color: #555;
+    }
+
+    /* Media Query for Smaller Screens */
+    @media (max-width: 768px) {
+      .header img {
+        width: 100px;
+      }
+
+      .container {
+        padding: 10px;
+      }
+
+      figure {
+        max-width: 180px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>Welcome to My GitHub Page!</h1>
-    <p>This is my first webpage hosted on GitHub Pages.</p>
+  <!-- Header Section -->
+  <div class="header">
+    <h1>Krish Patel</h1>
+    <img src="./images/krishpatel.jpg" alt="Krish Patel">
+    <p>Computer Engineering Student | Tech Enthusiast | Future Tech Consultant</p>
+    <p>Email: krish.patel@example.com</p>
+    <p><a href="https://www.linkedin.com/in/krishpatel">LinkedIn</a> | <a href="https://github.com/krishp1234">GitHub</a></p>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <h2>About Me</h2>
+    <p>
+      I am a **Computer Engineering student** at **Michigan State University**, passionate about **software development, AI-based projects, and tech consulting**. 
+      With experience in **C++, Python, Java, SQL, and hardware design**, I have worked on **AI-powered applications, robotics, and PCB design**. 
+      My goal is to **bridge technology and business by working in tech consulting**.
+    </p>
+
+    <hr>
+
+    <h2>Skills</h2>
+    <ul>
+      <li><b>Programming:</b> C++, Python, Java, SQL</li>
+      <li><b>AI & Machine Learning:</b> TensorFlow, OpenCV</li>
+      <li><b>Hardware & Electronics:</b> PCB Design (KiCad), Microcontrollers</li>
+      <li><b>Web Development:</b> HTML, CSS, JavaScript</li>
+      <li><b>Tech Consulting & Business:</b> Data Analytics, Project Management</li>
+    </ul>
+
+    <hr>
+
+    <h2>Experience</h2>
+    <ul>
+      <li><b>Knowledge Science Intern</b> - Delta Dental (2025)  
+        <p>• Assisted in data analysis and visualization to improve decision-making in the healthcare domain.</p>
+        <p>• Explored AI and machine learning applications in dental insurance.</p>
+      </li>
+      
+      <li><b>Electronics Subgroup Member</b> - Rocketry Team  
+        <p>• Designed and tested PCB layouts using KiCad, improving real-time sensor data accuracy by 15%.</p>
+        <p>• Created detailed schematics for a high-precision telemetry system for rocket launches.</p>
+      </li>
+
+      <li><b>IT Services & Database UX Developer</b> - Student Information Technology Services  
+        <p>• Developed a user-friendly interface for an internal device management database.</p>
+        <p>• Improved data organization and retrieval, optimizing IT asset tracking.</p>
+      </li>
+    </ul>
+
+    <hr>
+
+    <h2>Projects</h2>
+    <div class="figure-container">  
+      <figure>
+        <img src="./images/ai-project.png" alt="AI-powered Application">
+        <figcaption>AI-powered Application: Built using Python & TensorFlow</figcaption>
+      </figure>
+      
+      <figure>
+        <img src="./images/pcb-design.png" alt="PCB Design for Rocketry">
+        <figcaption>PCB Design: Rocketry Team's telemetry system</figcaption>
+      </figure>
+
+      <figure>
+        <img src="./images/ux-database.png" alt="UX Development">
+        <figcaption>UX Development: Internal IT database management system</figcaption>
+      </figure>
+    </div>
+
+    <hr>
+
+    <h2>Certifications</h2>
+    <ul>
+      <li>CompTIA A+ Certification</li>
+      <li>Certified in PCB Design (KiCad)</li>
+      <li>SQL & Database Management (Udemy)</li>
+    </ul>
+
+    <hr>
+
+    <h2>Contact</h2>
+    <p>Feel free to reach out via email or connect with me on <a href="https://www.linkedin.com/in/krishpatel">LinkedIn</a>!</p>
+
+  </div>
 </body>
 </html>
