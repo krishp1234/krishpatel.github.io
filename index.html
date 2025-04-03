@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Krish Patel - Portfolio</title>
   <style>
-    /* General Body Styling */
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -13,7 +12,6 @@
       color: #333;
     }
 
-    /* Header Section */
     .header {
       padding: 20px;
       text-align: center;
@@ -27,12 +25,10 @@
       margin-top: 10px;
     }
 
-    /* Main Content */
     .container {
       padding: 20px;
     }
 
-    /* Responsive Tables */
     table {
       width: 100%;
       border-collapse: collapse;
@@ -43,7 +39,6 @@
       padding: 10px;
     }
 
-    /* Responsive Figures */
     .figure-container {
       display: flex;
       flex-wrap: wrap;
@@ -75,7 +70,11 @@
       height: 400px;
     }
 
-    /* Media Query for Smaller Screens */
+    h3.workshop-title {
+      text-align: center;
+      margin-top: 40px;
+    }
+
     @media (max-width: 768px) {
       .header img {
         width: 100px;
@@ -95,7 +94,7 @@
   <!-- Header Section -->
   <div class="header">
     <h1>Krish Patel</h1>
-    <img src="./images/krishpatel.jpg" alt="Krish Patel">
+    <img src="./images/krishpatel.jpg" alt="Krish Patel" />
     <p>Computer Engineering Student</p>
     <p>Email: <a href="mailto:krishspatel19@gmail.com">krishspatel19@gmail.com</a></p>
     <p><a href="https://www.linkedin.com/in/krishpatel17">LinkedIn</a> | <a href="https://github.com/krishp1234">GitHub</a></p>
@@ -110,72 +109,67 @@
       My goal is to <b>bridge technology and business by working in tech consulting</b>.
     </p>
 
-    <hr>
+    <hr />
 
     <h2>Experience</h2>
     <ul>
-      <li><b>Electronics & Software Team Member</b> - Michigan State University Rocketry (Oct 2024 - Present)  
+      <li><b>Electronics & Software Team Member</b> - Michigan State University Rocketry (Oct 2024 - Present)
         <p>• Programmed a Raspberry Pi-based flight computer in Python, enabling real-time telemetry and reducing flight data errors by 15%.</p>
         <p>• Helped develop a new rocketry website with JavaScript, HTML, and CSS, boosting site traffic.</p>
         <p>• Engineered microcontroller systems for sensor integration, enhancing data capture accuracy.</p>
       </li>
-      
-      <li><b>Hardware and Web Design Lead</b> - Student Information Technology Services (Sep 2023 - May 2024)  
+      <li><b>Hardware and Web Design Lead</b> - Student Information Technology Services (Sep 2023 - May 2024)
         <p>• Refurbished & donated 70+ computers, raising $1,000+ in donations.</p>
         <p>• Inspected and troubleshooted 30-40 donated devices.</p>
       </li>
-
-      <li><b>Teaching Assistant</b> - Math Corps at the University of Michigan (June 2023 - Aug 2023)  
+      <li><b>Teaching Assistant</b> - Math Corps at the University of Michigan (June 2023 - Aug 2023)
         <p>• Provided instructional support to 10-15 underprivileged 9th-grade students in Algebra.</p>
         <p>• Collaborated with professors and teaching assistants to create lesson plans.</p>
       </li>
     </ul>
 
-    <hr>
+    <hr />
 
     <h2>Projects</h2>
     <p>🔷 <a href="hexagon.html" target="_blank">Hexagon Assignment</a></p>
-    <h3>🧍 Workshop 3: Stick Figure (Three.js)</h3>
 
-    <!-- Canvas added by Three.js -->
-    
-    <div class="figure-container">  
+    <h3 class="workshop-title">🧍 Workshop 3: Stick Figure (Three.js)</h3>
+
+    <div class="figure-container">
       <figure>
-        <img src="./images/ai-attendance.png" alt="AI Attendance System">
+        <img src="./images/ai-attendance.png" alt="AI Attendance System" />
         <figcaption>AI Attendance System: 98% recognition accuracy, saving 15 minutes per class.</figcaption>
       </figure>
-      
       <figure>
-        <img src="./images/rocket-pcb.png" alt="PCB Design for Rocketry">
+        <img src="./images/rocket-pcb.png" alt="PCB Design for Rocketry" />
         <figcaption>Rocketry PCB Design: Real-time flight telemetry system.</figcaption>
       </figure>
-
       <figure>
-        <img src="./images/autonomous-robot.png" alt="Autonomous Robotics">
+        <img src="./images/autonomous-robot.png" alt="Autonomous Robotics" />
         <figcaption>Autonomous Robot Navigation: 20% efficiency improvement using ROS2.</figcaption>
       </figure>
     </div>
 
-    <hr>
+    <hr />
 
     <h2>Certifications</h2>
     <ul>
       <li>CompTIA A+ Certification</li>
     </ul>
 
-    <hr>
+    <hr />
 
     <h2>Personal Interests</h2>
     <p>Outside of engineering and tech, I enjoy playing <b>basketball</b> and <b>pickleball</b>. 
-    I love the competitive nature of sports and the teamwork it fosters, which aligns with my approach to solving complex engineering problems.</p>
+      I love the competitive nature of sports and the teamwork it fosters, which aligns with my approach to solving complex engineering problems.</p>
 
-    <hr>
+    <hr />
 
     <h2>Contact</h2>
     <p>Feel free to reach out via email or connect with me on <a href="https://www.linkedin.com/in/krishpatel17">LinkedIn</a>!</p>
   </div>
 
-  <!-- Three.js Workshop 3 Animation -->
+  <!-- Workshop 3 Three.js Animation -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
   <script>
     const scene = new THREE.Scene();
