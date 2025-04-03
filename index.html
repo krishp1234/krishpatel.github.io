@@ -67,6 +67,14 @@
       color: #555;
     }
 
+    canvas {
+      display: block;
+      margin: 20px auto;
+      width: 100%;
+      max-width: 900px;
+      height: 400px;
+    }
+
     /* Media Query for Smaller Screens */
     @media (max-width: 768px) {
       .header img {
@@ -97,9 +105,9 @@
   <div class="container">
     <h2>About Me</h2>
     <p>
-      I am a **Computer Engineering student** at **Michigan State University****. 
-      I have worked on **AI-powered applications, autonomous robotics, and hardware design**.
-      My goal is to **bridge technology and business by working in tech consulting**.
+      I am a <b>Computer Engineering student</b> at <b>Michigan State University</b>. 
+      I have worked on <b>AI-powered applications, autonomous robotics, and hardware design</b>.
+      My goal is to <b>bridge technology and business by working in tech consulting</b>.
     </p>
 
     <hr>
@@ -126,10 +134,11 @@
     <hr>
 
     <h2>Projects</h2>
-    <p>
-  🔷 <a href="hexagon.html" target="_blank">Hexagon Assignment</a>
-</p>
+    <p>🔷 <a href="hexagon.html" target="_blank">Hexagon Assignment</a></p>
+    <h3>🧍 Workshop 3: Stick Figure (Three.js)</h3>
 
+    <!-- Canvas added by Three.js -->
+    
     <div class="figure-container">  
       <figure>
         <img src="./images/ai-attendance.png" alt="AI Attendance System">
@@ -164,7 +173,60 @@
 
     <h2>Contact</h2>
     <p>Feel free to reach out via email or connect with me on <a href="https://www.linkedin.com/in/krishpatel17">LinkedIn</a>!</p>
-
   </div>
+
+  <!-- Three.js Workshop 3 Animation -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+  <script>
+    const scene = new THREE.Scene();
+    const width = window.innerWidth;
+    const height = 400;
+    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    camera.position.z = 5;
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(width, height);
+    renderer.setClearColor(0xf4f4f4);
+    document.body.appendChild(renderer.domElement);
+
+    const greenMat = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    const redMat = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+    const blueMat = new THREE.MeshBasicMaterial({ color: 0x0000ff });
+
+    const head = new THREE.Mesh(new THREE.SphereGeometry(0.5, 32, 32), greenMat);
+    head.position.y = 1.5;
+
+    const body = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 2), redMat);
+    body.position.y = 0;
+
+    const leftArm = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 1), blueMat);
+    leftArm.position.set(-0.8, 0.5, 0);
+    leftArm.rotation.z = Math.PI / 4;
+
+    const rightArm = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 1), blueMat);
+    rightArm.position.set(0.8, 0.5, 0);
+    rightArm.rotation.z = -Math.PI / 4;
+
+    const leftLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 1), blueMat);
+    leftLeg.position.set(-0.3, -1.5, 0);
+    leftLeg.rotation.z = Math.PI / 16;
+
+    const rightLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 1), blueMat);
+    rightLeg.position.set(0.3, -1.5, 0);
+    rightLeg.rotation.z = -Math.PI / 16;
+
+    const figureGroup = new THREE.Group();
+    figureGroup.add(head, body, leftArm, rightArm, leftLeg, rightLeg);
+    scene.add(figureGroup);
+
+    function animate() {
+      requestAnimationFrame(animate);
+      figureGroup.rotation.y += 0.01;
+      figureGroup.rotation.x += 0.005;
+      renderer.render(scene, camera);
+    }
+
+    animate();
+  </script>
 </body>
 </html>
