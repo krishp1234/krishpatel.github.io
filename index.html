@@ -10,6 +10,7 @@
       font-family: Arial, sans-serif;
       line-height: 1.6;
       color: #333;
+      background-color: #fff;
     }
 
     .header {
@@ -27,16 +28,6 @@
 
     .container {
       padding: 20px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-    }
-
-    td {
-      padding: 10px;
     }
 
     .figure-container {
@@ -74,24 +65,9 @@
       text-align: center;
       margin-top: 40px;
     }
-
-    @media (max-width: 768px) {
-      .header img {
-        width: 100px;
-      }
-
-      .container {
-        padding: 10px;
-      }
-
-      figure {
-        max-width: 180px;
-      }
-    }
   </style>
 </head>
 <body>
-  <!-- Header Section -->
   <div class="header">
     <h1>Krish Patel</h1>
     <img src="./images/krishpatel.jpg" alt="Krish Patel" />
@@ -100,11 +76,10 @@
     <p><a href="https://www.linkedin.com/in/krishpatel17">LinkedIn</a> | <a href="https://github.com/krishp1234">GitHub</a></p>
   </div>
 
-  <!-- Main Content -->
   <div class="container">
     <h2>About Me</h2>
     <p>
-      I am a <b>Computer Engineering student</b> at <b>Michigan State University</b>. 
+      I am a <b>Computer Engineering student</b> at <b>Michigan State University</b>.
       I have worked on <b>AI-powered applications, autonomous robotics, and hardware design</b>.
       My goal is to <b>bridge technology and business by working in tech consulting</b>.
     </p>
@@ -113,40 +88,30 @@
 
     <h2>Experience</h2>
     <ul>
-      <li><b>Electronics & Software Team Member</b> - Michigan State University Rocketry (Oct 2024 - Present)
-        <p>• Programmed a Raspberry Pi-based flight computer in Python, enabling real-time telemetry and reducing flight data errors by 15%.</p>
-        <p>• Helped develop a new rocketry website with JavaScript, HTML, and CSS, boosting site traffic.</p>
-        <p>• Engineered microcontroller systems for sensor integration, enhancing data capture accuracy.</p>
-      </li>
-      <li><b>Hardware and Web Design Lead</b> - Student Information Technology Services (Sep 2023 - May 2024)
-        <p>• Refurbished & donated 70+ computers, raising $1,000+ in donations.</p>
-        <p>• Inspected and troubleshooted 30-40 donated devices.</p>
-      </li>
-      <li><b>Teaching Assistant</b> - Math Corps at the University of Michigan (June 2023 - Aug 2023)
-        <p>• Provided instructional support to 10-15 underprivileged 9th-grade students in Algebra.</p>
-        <p>• Collaborated with professors and teaching assistants to create lesson plans.</p>
-      </li>
+      <li><b>Electronics & Software Team Member</b> - MSU Rocketry (Oct 2024 - Present)</li>
+      <li><b>Hardware and Web Design Lead</b> - SITS (Sep 2023 - May 2024)</li>
+      <li><b>Teaching Assistant</b> - Math Corps @ University of Michigan (June 2023 - Aug 2023)</li>
     </ul>
 
     <hr />
 
     <h2>Projects</h2>
     <p>🔷 <a href="hexagon.html" target="_blank">Hexagon Assignment</a></p>
-
-    <h3 class="workshop-title">🧍 Workshop 3: Stick Figure (Three.js)</h3>
+    <p>🧍 <a href="#stickfigure">Workshop 3: Stick Figure (Three.js)</a></p>
+    <p>🌍 <a href="#bumpmap">Workshop 4: Bump Mapped Earth (Three.js)</a></p>
 
     <div class="figure-container">
       <figure>
         <img src="./images/ai-attendance.png" alt="AI Attendance System" />
-        <figcaption>AI Attendance System: 98% recognition accuracy, saving 15 minutes per class.</figcaption>
+        <figcaption>AI Attendance System: 98% recognition accuracy</figcaption>
       </figure>
       <figure>
-        <img src="./images/rocket-pcb.png" alt="PCB Design for Rocketry" />
-        <figcaption>Rocketry PCB Design: Real-time flight telemetry system.</figcaption>
+        <img src="./images/rocket-pcb.png" alt="PCB Design" />
+        <figcaption>Rocketry PCB Design: Telemetry system</figcaption>
       </figure>
       <figure>
         <img src="./images/autonomous-robot.png" alt="Autonomous Robotics" />
-        <figcaption>Autonomous Robot Navigation: 20% efficiency improvement using ROS2.</figcaption>
+        <figcaption>Autonomous Robot: ROS2 navigation</figcaption>
       </figure>
     </div>
 
@@ -160,66 +125,72 @@
     <hr />
 
     <h2>Personal Interests</h2>
-    <p>Outside of engineering and tech, I enjoy playing <b>basketball</b> and <b>pickleball</b>. 
-      I love the competitive nature of sports and the teamwork it fosters, which aligns with my approach to solving complex engineering problems.</p>
+    <p>I enjoy playing <b>basketball</b> and <b>pickleball</b>. Sports sharpen my teamwork and strategic skills.</p>
 
     <hr />
 
     <h2>Contact</h2>
-    <p>Feel free to reach out via email or connect with me on <a href="https://www.linkedin.com/in/krishpatel17">LinkedIn</a>!</p>
+    <p>Email or connect with me on <a href="https://www.linkedin.com/in/krishpatel17">LinkedIn</a>!</p>
   </div>
 
-  <!-- Workshop 3 Three.js Animation -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
-  <script>
+  <!-- Workshop 4: Bump Mapping -->
+  <h3 id="bumpmap" class="workshop-title">🌍 Workshop 4: Bump Mapped Earth (Three.js)</h3>
+  <div id="earth-container" style="width: 100%; height: 500px;"></div>
+
+  <script type="module">
+    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.166.0/build/three.module.js';
+    import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.166.0/examples/jsm/controls/OrbitControls.js';
+
+    const container = document.getElementById("earth-container");
     const scene = new THREE.Scene();
-    const width = window.innerWidth;
-    const height = 400;
-    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-    camera.position.z = 5;
+    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+    camera.position.z = 3;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(width, height);
-    renderer.setClearColor(0xf4f4f4);
-    document.body.appendChild(renderer.domElement);
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setClearColor(0x000000);
+    container.appendChild(renderer.domElement);
 
-    const greenMat = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-    const redMat = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-    const blueMat = new THREE.MeshBasicMaterial({ color: 0x0000ff });
+    const dirLight = new THREE.DirectionalLight(0xffffff, 2.0);
+    dirLight.position.set(5, 5, 5);
+    scene.add(dirLight);
 
-    const head = new THREE.Mesh(new THREE.SphereGeometry(0.5, 32, 32), greenMat);
-    head.position.y = 1.5;
+    const ambient = new THREE.AmbientLight(0xffffff, 0.3);
+    scene.add(ambient);
 
-    const body = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 2), redMat);
-    body.position.y = 0;
+    const textureLoader = new THREE.TextureLoader();
+    const earthTexture = textureLoader.load('textures/worldColour.5400x2700.jpg');
+    const bumpTexture = textureLoader.load('textures/earth_bumpmap.jpg');
+    earthTexture.colorSpace = THREE.SRGBColorSpace;
+    bumpTexture.colorSpace = THREE.SRGBColorSpace;
 
-    const leftArm = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 1), blueMat);
-    leftArm.position.set(-0.8, 0.5, 0);
-    leftArm.rotation.z = Math.PI / 4;
+    const material = new THREE.MeshStandardMaterial({
+      map: earthTexture,
+      bumpMap: bumpTexture,
+      bumpScale: 0.05,
+    });
 
-    const rightArm = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 1), blueMat);
-    rightArm.position.set(0.8, 0.5, 0);
-    rightArm.rotation.z = -Math.PI / 4;
+    const geometry = new THREE.SphereGeometry(1, 64, 64);
+    const earth = new THREE.Mesh(geometry, material);
+    scene.add(earth);
 
-    const leftLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 1), blueMat);
-    leftLeg.position.set(-0.3, -1.5, 0);
-    leftLeg.rotation.z = Math.PI / 16;
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.minDistance = 1;
+    controls.maxDistance = 10;
 
-    const rightLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 1), blueMat);
-    rightLeg.position.set(0.3, -1.5, 0);
-    rightLeg.rotation.z = -Math.PI / 16;
-
-    const figureGroup = new THREE.Group();
-    figureGroup.add(head, body, leftArm, rightArm, leftLeg, rightLeg);
-    scene.add(figureGroup);
+    window.addEventListener('resize', () => {
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height);
+    });
 
     function animate() {
       requestAnimationFrame(animate);
-      figureGroup.rotation.y += 0.01;
-      figureGroup.rotation.x += 0.005;
+      controls.update();
       renderer.render(scene, camera);
     }
-
     animate();
   </script>
 </body>
