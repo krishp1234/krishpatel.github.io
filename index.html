@@ -12,47 +12,40 @@
       color: #333;
       background-color: #fff;
     }
-
     .header {
       padding: 20px;
       text-align: center;
       background-color: #f4f4f4;
     }
-
     .header img {
       width: 150px;
       height: auto;
       border-radius: 50%;
       margin-top: 10px;
     }
-
     .container {
       padding: 20px;
     }
-
     .figure-container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 20px;
     }
-
     figure {
       text-align: center;
       max-width: 250px;
     }
-
     figure img {
       width: 100%;
       height: auto;
     }
-
     figcaption {
       margin-top: 10px;
       font-size: 0.9em;
       color: #555;
     }
-
+    /* Styling for the embedded canvases/containers */
     canvas {
       display: block;
       margin: 20px auto;
@@ -60,7 +53,7 @@
       max-width: 900px;
       height: 400px;
     }
-
+    /* Headings for workshop sections */
     h3.workshop-title {
       text-align: center;
       margin-top: 40px;
@@ -68,6 +61,7 @@
   </style>
 </head>
 <body>
+  <!-- Header Section -->
   <div class="header">
     <h1>Krish Patel</h1>
     <img src="./images/krishpatel.jpg" alt="Krish Patel" />
@@ -76,6 +70,7 @@
     <p><a href="https://www.linkedin.com/in/krishpatel17">LinkedIn</a> | <a href="https://github.com/krishp1234">GitHub</a></p>
   </div>
 
+  <!-- Main Content -->
   <div class="container">
     <h2>About Me</h2>
     <p>
@@ -98,12 +93,15 @@
     <h2>Projects</h2>
     <p>🔷 <a href="hexagon.html" target="_blank">Hexagon Assignment</a></p>
 
+    <!-- Workshop 3: Stick Figure Section -->
     <h3 id="stickfigure" class="workshop-title">🧍 Workshop 3: Stick Figure (Three.js)</h3>
     <canvas id="stickfigure-canvas"></canvas>
 
+    <!-- Workshop 4: Bump Mapped Earth Section -->
     <h3 id="bumpmap" class="workshop-title">🌍 Workshop 4: Bump Mapped Earth (Three.js)</h3>
     <div id="earth-container" style="width: 100%; height: 500px;"></div>
 
+    <!-- Other Projects -->
     <div class="figure-container">
       <figure>
         <img src="./images/ai-attendance.png" alt="AI Attendance System" />
@@ -137,114 +135,126 @@
     <p>Email or connect with me on <a href="https://www.linkedin.com/in/krishpatel17">LinkedIn</a>!</p>
   </div>
 
-  <!-- Workshop 3 Script -->
+  <!-- Workshop 3 Script: Stick Figure Animation -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
   <script>
+    // Select the canvas for the stick figure
     const canvas = document.getElementById("stickfigure-canvas");
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / 400, 0.1, 1000);
-    camera.position.z = 5;
 
-    const renderer = new THREE.WebGLRenderer({ canvas });
-    renderer.setSize(window.innerWidth, 400);
-    renderer.setClearColor(0xf4f4f4);
+    // Create a separate scene, camera, and renderer for Workshop 3
+    const scene3 = new THREE.Scene();
+    const camera3 = new THREE.PerspectiveCamera(75, window.innerWidth / 400, 0.1, 1000);
+    camera3.position.z = 5;
 
+    const renderer3 = new THREE.WebGLRenderer({ canvas });
+    renderer3.setSize(window.innerWidth, 400);
+    renderer3.setClearColor(0xf4f4f4);
+
+    // Define materials for the stick figure
     const greenMat = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
     const redMat = new THREE.MeshBasicMaterial({ color: 0xff0000 });
     const blueMat = new THREE.MeshBasicMaterial({ color: 0x0000ff });
 
+    // Create the stick figure geometry parts
     const head = new THREE.Mesh(new THREE.SphereGeometry(0.5, 32, 32), greenMat);
     head.position.y = 1.5;
-
     const body = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 2), redMat);
     body.position.y = 0;
-
     const leftArm = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 1), blueMat);
     leftArm.position.set(-0.8, 0.5, 0);
     leftArm.rotation.z = Math.PI / 4;
-
     const rightArm = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 1), blueMat);
     rightArm.position.set(0.8, 0.5, 0);
     rightArm.rotation.z = -Math.PI / 4;
-
     const leftLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 1), blueMat);
     leftLeg.position.set(-0.3, -1.5, 0);
     leftLeg.rotation.z = Math.PI / 16;
-
     const rightLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 1), blueMat);
     rightLeg.position.set(0.3, -1.5, 0);
     rightLeg.rotation.z = -Math.PI / 16;
 
+    // Group the parts together
     const figureGroup = new THREE.Group();
     figureGroup.add(head, body, leftArm, rightArm, leftLeg, rightLeg);
-    scene.add(figureGroup);
+    scene3.add(figureGroup);
 
+    // Animate the stick figure
     function animateStickFigure() {
       requestAnimationFrame(animateStickFigure);
       figureGroup.rotation.y += 0.01;
       figureGroup.rotation.x += 0.005;
-      renderer.render(scene, camera);
+      renderer3.render(scene3, camera3);
     }
-
     animateStickFigure();
   </script>
 
-  <!-- Workshop 4 Script -->
+  <!-- Workshop 4 Script: Bump Mapped Earth -->
   <script type="module">
     import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.166.0/build/three.module.js';
     import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.166.0/examples/jsm/controls/OrbitControls.js';
 
+    // Select the container for the Earth scene
     const container = document.getElementById("earth-container");
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-    camera.position.z = 3;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setClearColor(0x000000);
-    container.appendChild(renderer.domElement);
+    // Create a scene, camera, and renderer for Workshop 4
+    const scene4 = new THREE.Scene();
+    const camera4 = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+    camera4.position.z = 3;
 
+    const renderer4 = new THREE.WebGLRenderer({ antialias: true });
+    renderer4.setSize(container.clientWidth, container.clientHeight);
+    renderer4.setClearColor(0x000000); // black background
+    container.appendChild(renderer4.domElement);
+
+    // Add lights to the Earth scene
     const dirLight = new THREE.DirectionalLight(0xffffff, 2.0);
     dirLight.position.set(5, 5, 5);
-    scene.add(dirLight);
-
+    scene4.add(dirLight);
     const ambient = new THREE.AmbientLight(0xffffff, 0.3);
-    scene.add(ambient);
+    scene4.add(ambient);
 
+    // Load textures from the "textures" folder (ensure these files exist exactly as named)
     const textureLoader = new THREE.TextureLoader();
     const earthTexture = textureLoader.load('textures/worldColour.5400x2700.jpg');
     const bumpTexture = textureLoader.load('textures/earth_bumpmap.jpg');
     earthTexture.colorSpace = THREE.SRGBColorSpace;
     bumpTexture.colorSpace = THREE.SRGBColorSpace;
 
+    // Create material with the color map and bump map
     const material = new THREE.MeshStandardMaterial({
       map: earthTexture,
       bumpMap: bumpTexture,
       bumpScale: 0.05,
     });
 
+    // Create the Earth sphere geometry
     const geometry = new THREE.SphereGeometry(1, 64, 64);
     const earth = new THREE.Mesh(geometry, material);
-    scene.add(earth);
+    scene4.add(earth);
 
-    const controls = new OrbitControls(camera, renderer.domElement);
+    // Setup OrbitControls for the Earth scene
+    const controls = new OrbitControls(camera4, renderer4.domElement);
     controls.minDistance = 1;
     controls.maxDistance = 10;
 
+    // Resize handler for the Earth container
     window.addEventListener('resize', () => {
       const width = container.clientWidth;
       const height = container.clientHeight;
-      camera.aspect = width / height;
-      camera.updateProjectionMatrix();
-      renderer.setSize(width, height);
+      camera4.aspect = width / height;
+      camera4.updateProjectionMatrix();
+      renderer4.setSize(width, height);
     });
 
-    function animate() {
-      requestAnimationFrame(animate);
+    // Animate the Earth scene
+    function animateEarth() {
+      requestAnimationFrame(animateEarth);
+      // Optionally rotate the Earth slowly if desired:
+      // earth.rotation.y += 0.002;
       controls.update();
-      renderer.render(scene, camera);
+      renderer4.render(scene4, camera4);
     }
-    animate();
+    animateEarth();
   </script>
 </body>
 </html>
