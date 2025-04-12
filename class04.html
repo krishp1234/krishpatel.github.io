@@ -1,21 +1,81 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Bump Mapped Earth</title>
-  <style>
-    body { margin: 0; }
-    canvas { display: block; }
-  </style>
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://cdn.jsdelivr.net/npm/three@0.166.0/build/three.module.js",
-        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.166.0/examples/jsm/"
+<html lang="en">
+  <head>
+    <title>Workshop 4 - Bump Mapped Earth</title>
+    <style>
+      body { margin: 0; overflow: hidden; }
+      canvas { display: block; }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.166.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.166.0/examples/jsm/"
+        }
       }
-    }
-  </script>
-</head>
-<body>
-  <script type="module" src="./class04.js"></script>
-</body>
+    </script>
+  </head>
+  <body>
+    <script type="module">
+      import * as THREE from 'three';
+      import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+      // Create scene, camera, renderer
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 3;
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      // Lighting
+      const light = new THREE.DirectionalLight(0xffffff, 1.2);
+      light.position.set(5, 5, 5);
+      scene.add(light);
+      scene.add(new THREE.AmbientLight(0xffffff, 0.3));
+
+      // Textures
+      const loader = new THREE.TextureLoader();
+      const earthTexture = loader.load('textures/worldColour.5400x2700.jpg');
+      const bumpMap = loader.load('textures/earth_bumpmap.jpg');
+
+      earthTexture.colorSpace = THREE.SRGBColorSpace;
+      bumpMap.colorSpace = THREE.SRGBColorSpace;
+
+      // Earth material
+      const material = new THREE.MeshStandardMaterial({
+        map: earthTexture,
+        bumpMap: bumpMap,
+        bumpScale: 0.08,
+      });
+
+      // Earth geometry
+      const geometry = new THREE.SphereGeometry(1, 64, 64);
+      const earth = new THREE.Mesh(geometry, material);
+      scene.add(earth);
+
+      // Controls
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.minDistance = 1;
+      controls.maxDistance = 10;
+
+      // Resize handler
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      // Animate Earth
+      function animate() {
+        requestAnimationFrame(animate);
+        earth.rotation.y += 0.002; // Optional spin
+        controls.update();
+        renderer.render(scene, camera);
+      }
+      animate();
+    </script>
+  </body>
 </html>
