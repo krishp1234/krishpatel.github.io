@@ -1,30 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Workshop 4 - Bump Mapped Earth</title>
-  <style>
-    body {
-      margin: 0;
-    }
-    canvas {
-      display: block;
-    }
-  </style>
-</head>
-<body>
-  <!-- Import map to define module paths -->
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://cdn.jsdelivr.net/npm/three@0.166.0/build/three.module.js",
-        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.166.0/examples/jsm/"
+  <head>
+    <meta charset="UTF-8" />
+    <title>Workshop 4 - Spinning Earth</title>
+    <style>
+      body { margin: 0; }
+      canvas { display: block; }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.166.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.166.0/examples/jsm/"
+        }
       }
-    }
-  </script>
-
-  <!-- Module script loading the main JS file -->
-  <script type="module" src="./class04.js"></script>
-</body>
+    </script>
+  </head>
+  <body>
+    <script type="module" src="./class04.js"></script>
+  </body>
 </html>
