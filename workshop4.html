@@ -1,83 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Workshop 4 - Bump Mapping</title>
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      background-color: #000;
-    }
-    canvas {
-      display: block;
-    }
-  </style>
-</head>
-<body>
-  <!-- Three.js and OrbitControls -->
-  <script type="module">
-    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.166.0/build/three.module.js';
-    import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.166.0/examples/jsm/controls/OrbitControls.js';
+<!-- Workshop 4 Script: Bump Mapped Earth (Updated with Rotation) -->
+<script type="module">
+  import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.166.0/build/three.module.js';
+  import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.166.0/examples/jsm/controls/OrbitControls.js';
 
-    // Scene, camera, renderer
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 3;
+  // Select the container for the Earth scene
+  const container = document.getElementById("earth-container");
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+  // Create a scene, camera, and renderer for Workshop 4
+  const scene4 = new THREE.Scene();
+  const camera4 = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+  camera4.position.z = 3;
 
-    // Lights
-    const dirLight = new THREE.DirectionalLight(0xffffff, 2.0);
-    dirLight.position.set(5, 5, 5);
-    scene.add(dirLight);
+  const renderer4 = new THREE.WebGLRenderer({ antialias: true });
+  renderer4.setSize(container.clientWidth, container.clientHeight);
+  renderer4.setClearColor(0x000000); // black background
+  container.appendChild(renderer4.domElement);
 
-    const ambient = new THREE.AmbientLight(0xffffff, 0.3);
-    scene.add(ambient);
+  // Add lights to the Earth scene
+  const dirLight = new THREE.DirectionalLight(0xffffff, 2.0);
+  dirLight.position.set(5, 5, 5);
+  scene4.add(dirLight);
+  const ambient = new THREE.AmbientLight(0xffffff, 0.3);
+  scene4.add(ambient);
 
-    // Load Textures
-    const textureLoader = new THREE.TextureLoader();
-    const earthTexture = textureLoader.load('textures/worldColour.5400x2700.jpg');
-    const bumpTexture = textureLoader.load('textures/earth_bumpmap.jpg');
+  // Load textures from the "textures" folder (ensure these files exist exactly as named)
+  const textureLoader = new THREE.TextureLoader();
+  const earthTexture = textureLoader.load('textures/worldColour.5400x2700.jpg');
+  const bumpTexture = textureLoader.load('textures/earth_bumpmap.jpg');
+  earthTexture.colorSpace = THREE.SRGBColorSpace;
+  bumpTexture.colorSpace = THREE.SRGBColorSpace;
 
-    earthTexture.colorSpace = THREE.SRGBColorSpace;
-    bumpTexture.colorSpace = THREE.SRGBColorSpace;
+  // Create material with the color map and bump map
+  const material = new THREE.MeshStandardMaterial({
+    map: earthTexture,
+    bumpMap: bumpTexture,
+    bumpScale: 0.05,
+  });
 
-    // Earth sphere with bump mapping
-    const material = new THREE.MeshStandardMaterial({
-      map: earthTexture,
-      bumpMap: bumpTexture,
-      bumpScale: 0.05,
-    });
+  // Create the Earth sphere geometry
+  const geometry = new THREE.SphereGeometry(1, 64, 64);
+  const earth = new THREE.Mesh(geometry, material);
+  scene4.add(earth);
 
-    const geometry = new THREE.SphereGeometry(1, 64, 64);
-    const sphere = new THREE.Mesh(geometry, material);
-    scene.add(sphere);
+  // Setup OrbitControls for the Earth scene
+  const controls = new OrbitControls(camera4, renderer4.domElement);
+  controls.minDistance = 1;
+  controls.maxDistance = 10;
 
-    // Orbit controls
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.minDistance = 1;
-    controls.maxDistance = 10;
+  // Resize handler for the Earth container
+  window.addEventListener('resize', () => {
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+    camera4.aspect = width / height;
+    camera4.updateProjectionMatrix();
+    renderer4.setSize(width, height);
+  });
 
-    // Resize handler
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-
-    // Animation loop
-    function animate() {
-      requestAnimationFrame(animate);
-      controls.update();
-      renderer.render(scene, camera);
-    }
-
-    animate();
-  </script>
-</body>
-</html>
-
+  // Animate the Earth scene with rotation
+  function animate() {
+    requestAnimationFrame(animate);
+    // Spin the Earth (optional rotation)
+    earth.rotation.y += 0.002; // Adjust speed as desired
+    controls.update();
+    renderer4.render(scene4, camera4);
+  }
+  animate();
+</script>
