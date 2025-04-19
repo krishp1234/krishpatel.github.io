@@ -24,25 +24,6 @@
     .container {
       padding: 20px;
     }
-    .figure-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
-    figure {
-      text-align: center;
-      max-width: 250px;
-    }
-    figure img {
-      width: 100%;
-      height: auto;
-    }
-    figcaption {
-      margin-top: 10px;
-      font-size: 0.9em;
-      color: #555;
-    }
     canvas, .webgl-container {
       display: block;
       margin: 20px auto;
@@ -56,7 +37,7 @@
     }
   </style>
 
-  <!-- Importmap for Three and its addons (for Workshop 5) -->
+  <!-- Importmap for Three and its addons -->
   <script type="importmap">
   {
     "imports": {
@@ -120,22 +101,6 @@
       <a href="class05_1.html" target="_blank">View Full Workshop 5 →</a>
     </p>
 
-    <!-- Other Projects Thumbnails -->
-    <div class="figure-container">
-      <figure>
-        <img src="./images/ai-attendance.png" alt="AI Attendance" />
-        <figcaption>AI Attendance System</figcaption>
-      </figure>
-      <figure>
-        <img src="./images/rocket-pcb.png" alt="Rocket PCB" />
-        <figcaption>Rocketry PCB Design</figcaption>
-      </figure>
-      <figure>
-        <img src="./images/autonomous-robot.png" alt="Autonomous Robot" />
-        <figcaption>Autonomous Robotics</figcaption>
-      </figure>
-    </div>
-
     <hr />
 
     <h2>Certifications</h2>
@@ -154,7 +119,7 @@
     <p>Email or connect on <a href="https://www.linkedin.com/in/krishpatel17" target="_blank">LinkedIn</a>!</p>
   </div>
 
-  <!-- ===== Workshop 3 Script ===== -->
+  <!-- Workshop 3 Script -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
   <script>
     const canvas = document.getElementById("stickfigure-canvas");
@@ -194,10 +159,10 @@
     animateStickFigure();
   </script>
 
-  <!-- ===== Workshop 4 Script ===== -->
+  <!-- Workshop 4 Script -->
   <script type="module">
-    import * as THREE         from 'three';
-    import { OrbitControls }  from 'three/addons/controls/OrbitControls.js';
+    import * as THREE        from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
     const container4 = document.getElementById("earth-container");
     const scene4     = new THREE.Scene();
@@ -240,19 +205,19 @@
 
     function animateEarth() {
       requestAnimationFrame(animateEarth);
-      earthMesh.rotation.y += 0.002;  // spin
+      earthMesh.rotation.y += 0.002;
       controls4.update();
       renderer4.render(scene4, camera4);
     }
     animateEarth();
   </script>
 
-  <!-- ===== Workshop 5 Script ===== -->
+  <!-- Workshop 5 Script -->
   <script type="module">
-    import * as THREE         from 'three';
-    import { OrbitControls }  from 'three/addons/controls/OrbitControls.js';
-    import { MTLLoader }      from 'three/addons/loaders/MTLLoader.js';
-    import { OBJLoader }      from 'three/addons/loaders/OBJLoader.js';
+    import * as THREE        from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { MTLLoader }     from 'three/addons/loaders/MTLLoader.js';
+    import { OBJLoader }     from 'three/addons/loaders/OBJLoader.js';
 
     const container5 = document.getElementById("model-container");
     const scene5     = new THREE.Scene();
@@ -263,42 +228,36 @@
     renderer5.setSize(container5.clientWidth, container5.clientHeight);
     container5.appendChild(renderer5.domElement);
 
-    // lights
     scene5.add(new THREE.AmbientLight(0x888888, 0.5));
     const dirL = new THREE.DirectionalLight(0xffffff, 1.5);
     dirL.position.set(5,10,5);
     scene5.add(dirL);
 
-    // optional env‑map (from textures/Bridge2/*)
     const cubeLoader = new THREE.CubeTextureLoader().setPath('textures/Bridge2/');
     const envMap = cubeLoader.load([
       'posx.jpg','negx.jpg','posy.jpg','negy.jpg','posz.jpg','negz.jpg'
     ]);
     scene5.environment = scene5.background = envMap;
 
-    // orbit controls
     const controls5 = new OrbitControls(camera5, renderer5.domElement);
     controls5.enableDamping = true;
 
-    // load both models
     loadModel('bunny_texture','bunny');
     loadModel('sphere','sphere');
 
-    function loadModel(mtlName, objName) {
+    function loadModel(mtlName,objName){
       new MTLLoader().setPath('models/').load(
         `${mtlName}.mtl`,
-        (materials) => {
+        (materials)=>{
           materials.preload();
           new OBJLoader().setMaterials(materials).setPath('models/').load(
             `${objName}.obj`,
-            (obj) => {
-              // center & scale
-              const box = new THREE.Box3().setFromObject(obj);
-              const size = box.getSize(new THREE.Vector3()).length();
-              const s = 1/size;
+            (obj)=>{
+              const box=new THREE.Box3().setFromObject(obj);
+              const size=box.getSize(new THREE.Vector3()).length();
+              const s=1/size;
               obj.scale.set(s,s,s);
-              const center = box.getCenter(new THREE.Vector3());
-              obj.position.set(-center.x*s, -center.y*s, -center.z*s);
+              box.getCenter(obj.position).multiplyScalar(-s);
               scene5.add(obj);
             }
           );
@@ -306,18 +265,16 @@
       );
     }
 
-    // handle resize
-    window.addEventListener('resize', () => {
-      const w = container5.clientWidth, h = container5.clientHeight;
-      camera5.aspect = w/h; camera5.updateProjectionMatrix();
-      renderer5.setSize(w, h);
+    window.addEventListener('resize',()=>{
+      const w=container5.clientWidth, h=container5.clientHeight;
+      camera5.aspect=w/h; camera5.updateProjectionMatrix();
+      renderer5.setSize(w,h);
     });
 
-    // render loop
     (function animateModels(){
       requestAnimationFrame(animateModels);
       controls5.update();
-      renderer5.render(scene5, camera5);
+      renderer5.render(scene5,camera5);
     })();
   </script>
 
