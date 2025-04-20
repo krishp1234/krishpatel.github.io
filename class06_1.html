@@ -1,25 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF‑8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Workshop 6.1 – Shadow Mapping</title>
+
   <style>
-    body { margin: 0; overflow: hidden; }
-    canvas { display: block; }
+    body { margin: 0; overflow: hidden; background: #000; }
+    #shadow-container {
+      width: 100vw;
+      height: 100vh;
+    }
   </style>
 
-  <!-- importmap for Three and its addons -->
+  <!-- importmap so "three" and "three/addons/…" resolve correctly -->
   <script type="importmap">
   {
     "imports": {
-      "three":          "https://cdn.jsdelivr.net/npm/three@0.166.0/build/three.module.js",
-      "three/addons/":  "https://cdn.jsdelivr.net/npm/three@0.166.0/examples/jsm/"
+      "three":         "https://cdn.jsdelivr.net/npm/three@0.166.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.166.0/examples/jsm/"
     }
   }
   </script>
 </head>
 <body>
-  <!-- your script will append its own <canvas> -->
-  <script type="module" src="./class06_1.js"></script>
+
+  <!-- this DIV is where we'll attach our THREE.js canvas -->
+  <div id="shadow-container"></div>
+
+  <!-- your module (same name as teacher’s) -->
+  <script type="module" src="class06_1.js"></script>
 </body>
 </html>
